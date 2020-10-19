@@ -5,7 +5,7 @@ apt upgrade
 pkg install git
 pkg install python
 pkg install python2
-git clone https://github.com/Anonim-q/Youtube-video-downloader
+git clone https://github.com/Blinc13/Youtube-video-downloader
 pip install yapi
 pip install youtube-dl
 Запуск:
