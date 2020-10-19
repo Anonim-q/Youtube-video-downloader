@@ -1,0 +1,79 @@
+#!/usr/bin/python3
+import time, colorama, os, pickle, sys, yapi
+from subprocess import call
+data = "download.data"
+api = yapi.YoutubeAPI("AIzaSyAJMzX_t_tRoiSBs7-PS8eSnn6wdK9L1Us")
+try:
+  with open(data, "rb") as file:
+    directory2 = pickle.load(file)
+    dire = True
+    print (directory2)
+except:
+  dire = False
+colorama.init
+def start():
+  print (colorama.Fore . WHITE + "Youtube downloader")
+  time.sleep(1)
+  print (colorama.Style . RESET_ALL)
+  print (colorama.Fore . RED + "By Blinc")
+  print ("version 1.1:")
+  print (colorama.Fore . BLUE + "Канкатенация решает")
+  print (colorama.Style . RESET_ALL)
+def dir():
+  if dire == False:
+    try:
+     directory = input("Папка: ")
+     what = input("Запомнить дерикторию ? (y/n): ")
+     if what == "y":
+       with open(data, "wb") as file:
+         pickle.dump(directory, file)
+       del what
+     else:
+       del what
+     os.chdir(directory)
+    except:
+      print ("Неизвестная ошибка")
+      sys.exit()
+  else:
+    os.chdir(directory2)
+def download():
+  #https://youtu.be/y7guS3MPKg0
+  URL = input("Введите ссылку: ")
+  if input("Отобразить информацию о видео ? (y/n): ") == "y":
+    id = URL[17:28]
+    try:
+      print (api.get_video_info(id))
+    except:
+      print ("Чяго ?")
+      sys.exit()
+  else:
+    pass
+  #Настройка разрешения видео
+  if input("Загрузить видео ? (y/n): ") == "y":
+    resolw = input("Укажите разрешение , в котором будет загружено видео (144/360/720/audio/awt): ")
+    if resolw == "144":
+      resolution = "160"
+    elif resolw == "369":
+      resolution = "43"
+    elif resolw == "360":
+      resolution = "18"
+    elif resolw == "720":
+      resolution = "22"
+    elif resolw == "audio":
+      resolution = "140"
+    elif resolw == "awt":
+      resolution = "best"
+    else:
+      print ("Чяго ?")
+      sys.exit()
+    adr = "youtube-dl" + " -f " + resolution + " " + URL
+    del resolution, resolw
+    #скачаивание видео
+    video = call(adr.split(), shell=False)
+    print (video)
+  else:
+    pass
+start()
+dir()
+while True:
+  download()
